@@ -6,8 +6,10 @@ import Card from './components/Card';
 // https://stackoverflow.com/questions/49850537/reactjs-pass-same-props-to-multiple-components
 
 class App extends React.Component {
-  render() {
-    const cardProps = {
+  constructor() {
+    super();
+
+    this.state = {
       cardName: '',
       cardDescription: '',
       cardAttr1: 0,
@@ -17,17 +19,29 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
-      isSaveButtonDisabled: true,
+      isSaveButtonDisabled: false,
     };
+    this.onInputChange = this.onInputChange.bind(this);
+  }
+
+  onInputChange = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  render() {
     return (
       <>
         <Form
-          { ...cardProps }
-          onInputChange=""
+          { ...this.state }
+          onInputChange={ this.onInputChange }
           onSaveButtonClick=""
         />
         <Card
-          { ...cardProps }
+          { ...this.state }
         />
       </>
     );
