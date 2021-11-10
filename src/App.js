@@ -26,6 +26,7 @@ class App extends React.Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.disabledBttn = this.disabledBttn.bind(this);
+    this.saveCard = this.saveCard.bind(this);
   }
 
   onInputChange = ({ target }) => {
@@ -54,6 +55,19 @@ class App extends React.Component {
     } return true;
   }
 
+  saveCard = () => {
+    const initialState = {
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardRare: 'normal',
+    };
+    this.setState(initialState);
+  }
+
   render() {
     return (
       <>
@@ -61,7 +75,7 @@ class App extends React.Component {
           { ...this.state }
           onInputChange={ this.onInputChange }
           isSaveButtonDisabled={ this.disabledBttn() }
-          // onSaveButtonClick=""
+          onSaveButtonClick={ this.saveCard }
         />
         <Card
           { ...this.state }
