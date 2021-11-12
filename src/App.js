@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import CardList from './components/CardList';
 
 const highestStat = 91;
 const totalSum = 211;
@@ -26,7 +27,6 @@ class App extends React.Component {
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.disabledBttn = this.disabledBttn.bind(this);
-    this.saveCard = this.saveCard.bind(this);
   }
 
   onInputChange = ({ target }) => {
@@ -56,16 +56,32 @@ class App extends React.Component {
   }
 
   saveCard = () => {
-    const initialState = {
-      cardName: '',
-      cardDescription: '',
-      cardImage: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
-      cardRare: 'normal',
-    };
-    this.setState(initialState);
+    const { cardTrunfo } = this.state;
+    this.setState(
+      cardTrunfo
+        ? {
+          cardName: '',
+          cardDescription: '',
+          cardImage: '',
+          cardAttr1: 0,
+          cardAttr2: 0,
+          cardAttr3: 0,
+          cardRare: 'normal',
+          cardTrunfo: false,
+          hasTrunfo: true,
+        }
+        : {
+          cardName: '',
+          cardDescription: '',
+          cardImage: '',
+          cardAttr1: 0,
+          cardAttr2: 0,
+          cardAttr3: 0,
+          cardRare: 'normal',
+          cardTrunfo: false,
+          hasTrunfo: false,
+        },
+    );
   }
 
   render() {
@@ -78,6 +94,9 @@ class App extends React.Component {
           onSaveButtonClick={ this.saveCard }
         />
         <Card
+          { ...this.state }
+        />
+        <CardList
           { ...this.state }
         />
       </>

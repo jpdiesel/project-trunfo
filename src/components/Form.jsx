@@ -12,11 +12,12 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
     } = this.props;
+
     return (
       <>
         <label htmlFor="cardName">
@@ -98,17 +99,24 @@ class Form extends React.Component {
             <option>muito raro</option>
           </select>
         </label>
-        <label htmlFor="superCard">
-          <input
-            data-testid="trunfo-input"
-            type="checkbox"
-            id="superCard"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-            name="cardTrunfo"
-          />
-          Super Trunfo
-        </label>
+        {hasTrunfo
+          ? <p>Você já tem um Super Trunfo em seu baralho</p>
+          : (
+            <label htmlFor="superCard">
+              <input
+                data-testid="trunfo-input"
+                type="checkbox"
+                id="superCard"
+                checked={ cardTrunfo }
+                onChange={ onInputChange }
+                name="cardTrunfo"
+              />
+              Super Trunfo
+            </label>)}
+        {// o requisito acima foi feito com base no código do Victor Baun no GitHub. Eu já havia implementedo minha função, porém o ESLINT estava dando um erro
+        // que eu não consegui resolver sozinho e nem com a thread do Slack, então resolvi ir atrás de alguém que tinha feito um código similar
+        // para poder comparar e resolver o problema
+        }
         <button
           data-testid="save-button"
           type="button"
