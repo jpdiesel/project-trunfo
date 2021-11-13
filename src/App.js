@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
-import CardList from './components/CardList';
+// import CardList from './components/CardList';
 
 const highestStat = 91;
 const totalSum = 211;
@@ -96,9 +96,9 @@ class App extends React.Component {
         <Card
           { ...this.state }
         />
-        <CardList
+        {/* <CardList
           { ...this.state }
-        />
+        /> */}
       </>
     );
   }
