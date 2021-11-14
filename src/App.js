@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
-// import CardList from './components/CardList';
+import CardList from './components/CardList';
 
 const highestStat = 91;
 const totalSum = 211;
@@ -24,6 +24,7 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      cardList: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.disabledBttn = this.disabledBttn.bind(this);
@@ -56,7 +57,31 @@ class App extends React.Component {
   }
 
   saveCard = () => {
-    const { cardTrunfo } = this.state;
+    // console.log(event);
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardTrunfo,
+      cardList,
+    } = this.state;
+    const cardObj = {
+      cardNam: cardName,
+      cardDesc: cardDescription,
+      cardImg: cardImage,
+      cardStts1: cardAttr1,
+      cardStts2: cardAttr2,
+      cardStts3: cardAttr3,
+      cardRarity: cardRare,
+      cardTrun: cardTrunfo,
+    };
+    cardList.push(cardObj);
+    (<CardList cardComp={ cardList } />);
+    // REQUISITO 8 FEITO COM A AJUDA DO ARY BARBOSA NO ZOOM
     this.setState(
       cardTrunfo
         ? {
@@ -96,9 +121,11 @@ class App extends React.Component {
         <Card
           { ...this.state }
         />
-        {/* <CardList
-          { ...this.state }
-        /> */}
+        <ul>
+          <CardList
+            { ...this.state }
+          />
+        </ul>
       </>
     );
   }
